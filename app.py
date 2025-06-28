@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from models import view_books, add_book, update_book, delete_book
+from models import view_books, add_book, update_book, delete_book, init_db
 
 app = Flask(__name__)
 
@@ -49,4 +49,5 @@ def put_book(book_id, new_title, new_author):
         return jsonify({"message": "Book updated successfully!"}), 200
 
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True, host='0.0.0.0', port=5000)
