@@ -44,7 +44,8 @@ def search_book(book_id, books):
 
     for book in books:
         if book[0] == book_id:
-            indexed_book = {"id": book[0],
+            indexed_book = {
+                "id": book[0],
                 "title": book[1],
                 "author": book[2]
             }
@@ -62,7 +63,11 @@ def post_book(title, author):
 def put_book(book_id, new_title, new_author):
     if request.method == 'PUT':
         update_book(book_id, new_title, new_author)
-        updated_book = {'id': book_id, 'title': new_title, 'author': new_author}
+        updated_book = {
+                'id': book_id, 
+                'title': new_title, 
+                'author': new_author
+            }
         return jsonify({"message": "Book updated successfully!", 
                 "data": updated_book}), 200
 
