@@ -19,8 +19,7 @@ def get_books():
                 "title": book[1],
                 "author": book[2]
             }
-
-        dictionary_books.append(book_dict)
+            dictionary_books.append(book_dict)
 
         return jsonify(dictionary_books), 200
 
@@ -33,11 +32,11 @@ def manage_book(book_id):
     if indexed_book is None:
         return jsonify({"error": "Book not found"}), 404
 
-    if request.method == 'GET':
-        return jsonify(indexed_book), 200
-    elif request.method == 'DELETE':
+    if request.method == 'DELETE':
         delete_book(book_id)
         return jsonify({"message": "Book Successfully Deleted"}), 200
+    
+    return jsonify(indexed_book), 200
 
 def search_book(book_id, books):
     indexed_book = None
