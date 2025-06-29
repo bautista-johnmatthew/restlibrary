@@ -32,7 +32,11 @@ def search_book(book_id, books):
     indexed_book = None
     for book in books:
         if book[0] == book_id:
-            indexed_book = book
+            indexed_book = {
+                "id": book[0],
+                "title": book[1],
+                "author": book[2]
+            }
 
     return indexed_book
 
