@@ -30,6 +30,7 @@ def manage_book(book_id):
 
 def search_book(book_id, books):
     indexed_book = None
+
     for book in books:
         if book[0] == book_id:
             indexed_book = {
@@ -43,8 +44,9 @@ def search_book(book_id, books):
 @app.route('/books/<title>/<author>', methods=['POST'])
 def post_book(title, author):
     if request.method == 'POST':
-        add_book(title, author)
-        return jsonify({"message": "Book added successfully!"}), 201
+        new_book = add_book(title, author)
+        return jsonify({"message": "Book added successfully!", 
+                "data": new_book, "location" : f"/books/{new_book[0]}"}), 201
     
 @app.route('/books/<int:book_id>/<new_title>/<new_author>', methods=['PUT'])
 def put_book(book_id, new_title, new_author):
