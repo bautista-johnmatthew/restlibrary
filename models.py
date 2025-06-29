@@ -24,13 +24,14 @@ def add_book(title, author):
     cur.execute("INSERT INTO books (title, author) VALUES (?, ?)", 
                 (title, author))
     
+    # Get the ID of the newly inserted book
     new_book_id = cur.lastrowid
     cur.execute("SELECT * FROM books WHERE id = ?", (new_book_id,))
     new_book = cur.fetchone()
     conn.commit()
     conn.close()
-
     print("Book added successfully!")
+
     return {
         "id": new_book[0],
         "title": new_book[1],
