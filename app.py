@@ -57,7 +57,7 @@ def post_book(title, author):
     if request.method == 'POST':
         new_book = add_book(title, author)
         return jsonify({"message": "Book added successfully!", 
-                "data": new_book, "location" : f"/books/{new_book[0]}"}), 201
+                "data": new_book, "location" : f"/books/{new_book['id']}"}), 201
     
 @app.route('/books/<int:book_id>/<new_title>/<new_author>', methods=['PUT'])
 def put_book(book_id, new_title, new_author):
