@@ -11,7 +11,18 @@ def index():
 @app.route('/books', methods=['GET'])
 def get_books():
     if request.method == 'GET':
-        return jsonify(view_books()), 200
+        dictionary_books = []
+
+        for book in view_books():
+            book_dict = {
+                "id": book[0],
+                "title": book[1],
+                "author": book[2]
+            }
+
+        dictionary_books.append(book_dict)
+
+        return jsonify(dictionary_books), 200
 
 @app.route('/books/<int:book_id>', methods=['GET', 'DELETE'])
 def manage_book(book_id):
