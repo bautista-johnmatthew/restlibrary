@@ -13,6 +13,9 @@ def get_books():
     if request.method == 'GET':
         dictionary_books = []
 
+        if not view_books():
+            return jsonify({"message": "No books found in the database."}), 404
+
         for book in view_books():
             book_dict = {
                 "id": book[0],
