@@ -47,7 +47,7 @@ def view_books():
     conn.close()
 
     if not books:
-        return None
+        return False
     
     return books
 
