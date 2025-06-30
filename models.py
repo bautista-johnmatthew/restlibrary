@@ -47,7 +47,7 @@ def view_books():
     conn.close()
 
     if not books:
-        return False
+        return "No books found in the database."
     
     return books
 
