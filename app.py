@@ -10,21 +10,20 @@ def index():
 
 @app.route('/books', methods=['GET'])
 def get_books():
-    if request.method == 'GET':
-        dictionary_books = []
+    dictionary_books = []
 
-        if view_books() != []:
-            return jsonify({"message": "No books found in the database."}), 404
+    if view_books() != []:
+        return jsonify({"message": "No books found in the database."}), 404
 
-        for book in view_books():
-            book_dict = {
-                "id": book[0],
-                "title": book[1],
-                "author": book[2]
-            }
-            dictionary_books.append(book_dict)
+    for book in view_books():
+        book_dict = {
+            "id": book[0],
+            "title": book[1],
+            "author": book[2]
+        }
+        dictionary_books.append(book_dict)
 
-        return jsonify(dictionary_books), 200
+    return jsonify(dictionary_books), 200
 
 @app.route('/books/<int:book_id>', methods=['GET', 'DELETE'])
 def manage_book(book_id):
@@ -56,22 +55,20 @@ def search_book(book_id, books):
 
 @app.route('/books/<title>/<author>', methods=['POST'])
 def post_book(title, author):
-    if request.method == 'POST':
-        new_book = add_book(title, author)
-        return jsonify({"message": "Book added successfully!", 
-                "data": new_book, "location" : f"books/{new_book['id']}"}), 201
+    new_book = add_book(title, author)
+    return jsonify({"message": "Book added successfully!", 
+            "data": new_book, "location" : f"books/{new_book['id']}"}), 201
     
 @app.route('/books/<int:book_id>/<new_title>/<new_author>', methods=['PUT'])
 def put_book(book_id, new_title, new_author):
-    if request.method == 'PUT':
-        update_book(book_id, new_title, new_author)
-        updated_book = {
-                'id': book_id, 
-                'title': new_title, 
-                'author': new_author
-            }
-        return jsonify({"message": "Book updated successfully!", 
-                "data": updated_book}), 200
+    update_book(book_id, new_title, new_author)
+    updated_book = {
+            'id': book_id, 
+            'title': new_title, 
+            'author': new_author
+        }
+    return jsonify({"message": "Book updated successfully!", 
+            "data": updated_book}), 200
 
 if __name__ == '__main__':
     init_db()
