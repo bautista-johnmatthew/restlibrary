@@ -11,8 +11,8 @@ def index():
 @app.route('/books', methods=['GET'])
 def get_books():
     dictionary_books = []
-
-    if view_books() != []:
+    
+    if not view_books():
         return jsonify({"message": "No books found in the database."}), 404
 
     for book in view_books():
